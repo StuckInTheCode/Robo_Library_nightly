@@ -3,9 +3,10 @@
 
 #include "Arduino.h"
 #include "InteractionCommand.h"
-//#include "pch.h"
 #include <Adafruit_PWMServoDriver.h>
+
 static Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+static boolean started = false;
 #define SERVOMIN  150 
 #define SERVOMAX  550 
 #define SERVOPORT0 0 
@@ -15,27 +16,7 @@ class ServoMovementCommand : public InteractionCommand
 {
 public:
 
-    ServoMovementCommand() {};
-//    ServoMovementCommand() 
-//    {
-//      if(!started)
-//      {
-//        //pwm.begin();
-//        //pwm.setPWMFreq(60);
-//        started = true;
-//      }
-//    };
-//
-//    ServoMovementCommand(int servoNum, int deg) : mServoNum(servoNum), mDeg(deg)
-//    {
-//      if(!started)
-//      {
-//      //pwm.begin();
-//      //pwm.setPWMFreq(60);
-//      started = true;
-//    }
-//    }
-//
+    ServoMovementCommand(): mServoNum(0) , mDeg(90) {}
     ~ServoMovementCommand() {}
 
     void execute()
@@ -67,8 +48,6 @@ public:
 
 private:
 
-    boolean started = false;
-    //static Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
     int mDeg;
     int mServoNum;
 

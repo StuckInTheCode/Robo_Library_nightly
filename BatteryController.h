@@ -1,17 +1,13 @@
 #ifndef BatteryController_H
 #define BatteryController_H
 #include "Arduino.h"
-
-//#include "pch.h"
 #include "BatteryChargeSensor.h"
+
+#define VOLT_PIN 20
 
 class BatteryController
 {
 public:
-    //VOLT_PIN
-    int  VOLT_PIN = 20;
-
-   BatteryChargeSensor sensor = BatteryChargeSensor(VOLT_PIN);
 
     BatteryController() {}
     ~BatteryController() {}
@@ -39,7 +35,7 @@ public:
     }
 
 private:
-
+    BatteryChargeSensor sensor = BatteryChargeSensor(VOLT_PIN);
 
 };
 

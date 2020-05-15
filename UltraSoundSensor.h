@@ -5,19 +5,21 @@
 class UltraSoundSensor
 {
 public:
-    UltraSoundSensor()
+    UltraSoundSensor() : duration(0), distance(3000)
     {
   
     }
+
+    ~UltraSoundSensor() {}
+
     void init(int trig, int echo)
     {
-        pinMode(trigPin, OUTPUT);
-        pinMode(echoPin, INPUT); 
-
         trigPin = trig;
         echoPin = echo;
+
+        pinMode(trigPin, OUTPUT);
+        pinMode(echoPin, INPUT); 
     }
-    ~UltraSoundSensor() {}
 
     int read() {
 

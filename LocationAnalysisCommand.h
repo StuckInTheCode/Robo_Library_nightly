@@ -7,21 +7,19 @@
 #include "PhotoSensitiveSensor.h"
 //class MovementController;
 
+#define ikCenter 14
+#define ikLeft 15
+#define ikRight 16
+#define ikBack 17
+
+#define trigPin 10
+#define echoPin 9
+
+#define lightSensorPin 18
+
 class LocationAnalysisCommand : public InteractionCommand
 {
   public:
-
-      int ikCenter = 14; // ��� ������������ ��-�������
-      int ikLeft = 15; // ��� ������������ ��-�������
-      int ikRight = 16; // ��� ������������ ��-�������
-      int ikBack = 17; // ��� ������������ ��-�������
-
-
-      int trigPin = 10; //���� ��� ��
-      int echoPin = 9;
-
-      int lightSensorPin = 18;
-
 
     LocationAnalysisCommand() 
     { 

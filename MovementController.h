@@ -7,20 +7,19 @@
 #include "PhotoSensitiveSensor.h"
 #include "ServoMovementCommand.h"
 
+#define ikCenter 14
+#define ikLeft 15
+#define ikRight 16
+#define ikBack 17
+
+#define trigPin 10
+#define echoPin 9
+
+#define lightSensorPin 18
 
 class MovementController
 {
 public:
-    int ikCenter = 14;
-    int ikLeft = 15; 
-    int ikRight = 16; 
-    int ikBack = 17; 
-
-
-    int trigPin = 10; 
-    int echoPin = 9;
-
-    int lightSensorPin = 18;
 
     MovementController()
     {
@@ -45,25 +44,37 @@ public:
             {
                 switch (forbiddenDirection)
                 {
-                case 0:
-                    motorCommand.init(3, 500)->execute();
-                    motorCommand.init(2, 200)->execute();
-                    motorCommand.init(1)->execute();
+                case 0: //forward
+                    if (MotorMovementCommand::getCurrentDirection() < 3)
+                    {
+                        motorCommand.init(3, 500)->execute();
+                        motorCommand.init(2, 200)->execute();
+                        motorCommand.init(1)->execute();
+                    }
                     break;
-                case 1:
-                    motorCommand.init(3, 500)->execute();
-                    motorCommand.init(2, 200)->execute();
-                    motorCommand.init(1)->execute();
+                case 1://center && left
+                    if (MotorMovementCommand::getCurrentDirection() < 3)
+                    {
+                        motorCommand.init(3, 500)->execute();
+                        motorCommand.init(2, 200)->execute();
+                        motorCommand.init(1)->execute();
+                    }
                     break;
-                case 2:
-                    motorCommand.init(3, 500)->execute();
-                    motorCommand.init(0, 200)->execute();
-                    motorCommand.init(1)->execute();
+                case 2://center && right
+                    if (MotorMovementCommand::getCurrentDirection() < 3)
+                    {
+                        motorCommand.init(3, 500)->execute();
+                        motorCommand.init(0, 200)->execute();
+                        motorCommand.init(1)->execute();
+                    }
                     break;
-                case 3:
-                    motorCommand.init(1, 500)->execute();
-                    motorCommand.init(0, 500)->execute();
-                    motorCommand.init(3)->execute(); //time?
+                case 3://back
+                    if (MotorMovementCommand::getCurrentDirection() == 3)
+                    {
+                        motorCommand.init(1, 500)->execute();
+                        motorCommand.init(0, 500)->execute();
+                        motorCommand.init(3)->execute(); //time?
+                    }
                 }
 
                 //boolean barrierInForward = checkUltraSoundSensor();

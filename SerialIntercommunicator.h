@@ -19,6 +19,7 @@ class SerialIntercommunicator
              ; // wait for serial port to connect. Needed for native USB port only
          }
 
+         Serial.println("Serial loaded");
          locationCommand.init();
     }
 
@@ -43,7 +44,7 @@ class SerialIntercommunicator
                 locationCommand.execute();
                 write(locationCommand.getResultString());
                 break;
-            case 't': break;  batteryController.run(); break;
+            case 't': break;  write(batteryController.run()); break;
             default:
                 break;
             }
@@ -63,14 +64,18 @@ class SerialIntercommunicator
     void write(const char * data)
     {
         Serial.write(data);
-        ///
+    }
+
+    void write(const byte data)
+    {
+        Serial.write(data);
     }
 
 private:
 
     String command;
     String dist;
-//
+
     LocationAnalysisCommand locationCommand;
     ServoMovementCommand servoCommand;
     MotorMovementCommand motorCommand;

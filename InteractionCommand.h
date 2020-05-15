@@ -6,7 +6,8 @@
 class InteractionCommand
 {
   public:
-      InteractionCommand() {};
+  
+  InteractionCommand() {};
   ~InteractionCommand() {};
   virtual void execute() = 0;
 };

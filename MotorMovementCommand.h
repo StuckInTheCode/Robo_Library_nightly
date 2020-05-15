@@ -11,13 +11,14 @@ static AF_DCMotor motor3(3);
 static AF_DCMotor motor4(4);
 static boolean running;
 static int currentDirection = -1;
+#define speed  100 //motors speed
 
 class MotorMovementCommand : public InteractionCommand
 {
 public:
 
-    int speed = 100; //motors speed
-    MotorMovementCommand(){};
+
+    MotorMovementCommand():mDirection(-1), mTimeDelay(0) {};
     MotorMovementCommand(int direction, int timeDelay = 0): mDirection(direction), mTimeDelay(timeDelay) {};
     ~MotorMovementCommand() {}
 

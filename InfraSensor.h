@@ -6,11 +6,16 @@ class InfraSensor
 {
 public:
   
-    InfraSensor()
-  {
-    
-  }
-  
+    InfraSensor()  {}
+    InfraSensor(int center, int left, int right, int back)
+    {
+        ikCenter = center;
+        ikLeft = left;
+        ikRight = right;
+        ikBack = back;
+    }
+    ~InfraSensor() {}
+
   void init(int center, int left, int right, int back)
   {
     ikCenter = center;
@@ -18,7 +23,6 @@ public:
     ikRight = right;
     ikBack = back;
   }
-  ~InfraSensor() {}
 
   int * read()
   {

@@ -6,10 +6,11 @@ class PhotoSensitiveSensor
 {
   public:
   PhotoSensitiveSensor(): lightLevel(0) {}
+
   void init(int sensorPin) 
   {
-      pinMode(sensorPin, INPUT);
       lightSensorPin = sensorPin;
+      pinMode(sensorPin, INPUT);
   }
   ~PhotoSensitiveSensor();
 

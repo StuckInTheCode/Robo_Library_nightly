@@ -10,7 +10,7 @@ class BatteryChargeSensor
   public:
   BatteryChargeSensor() : voltage(0) {};
   BatteryChargeSensor(int voltPin): mVoltPint(voltPin), voltage(0) {};
-  ~BatteryChargeSensor() {}
+  ~BatteryChargeSensor() {};
 
   void init(int voltPin)
   {

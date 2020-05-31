@@ -7,16 +7,8 @@ class ArduinoInteractionManager
   ArduinoInteractionManager();
   ~ArduinoInteractionManager();
 
-  void begin()
-  {
-      serialcomm = new SerialIntercommunicator();
-      movement = new MovementController();
-  }
-  void handle()
-  {
-      serialcomm->run();
-      movement->run();
-  }
+  void begin();
+  void handle();
 
   private:
   MovementController * movement;

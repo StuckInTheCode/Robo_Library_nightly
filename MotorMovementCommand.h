@@ -9,22 +9,20 @@ static AF_DCMotor motor1(1);
 static AF_DCMotor motor2(2);
 static AF_DCMotor motor3(3);
 static AF_DCMotor motor4(4);
-static boolean running;
-static int currentDirection = -1;
-#define speed  100 //motors speed
+
+#define realspeed 100
+//static speed = 100; //motors speed
 
 class MotorMovementCommand : public InteractionCommand
 {
 public:
-
-
-    MotorMovementCommand():mDirection(-1), mTimeDelay(0) {};
-    MotorMovementCommand(int direction, int timeDelay = 0): mDirection(direction), mTimeDelay(timeDelay) {};
+    MotorMovementCommand();
+    MotorMovementCommand(int direction, int timeDelay);
     ~MotorMovementCommand() {}
 
     static boolean isRunning()
     {
-        return running;
+        return MotorMovementCommand::running;
     }
 
     static int getCurrentDirection()
@@ -32,10 +30,15 @@ public:
         return currentDirection;
     }
 
+    static int setSpeed(int speed)
+    {
+        speed = speed;
+    }
+
     void execute()
     {
-        currentDirection = mDirection;
-        switch (mDirection)
+        //currentDirection = mDirection;
+        switch (currentDirection)
         {
         case -1:
             stop();
@@ -56,19 +59,23 @@ public:
 
     MotorMovementCommand * init(int direction, int timeDelay = 0)
     {
-        mDirection = direction;
+        currentDirection = direction;
+        //mDirection = direction;
         mTimeDelay = timeDelay;
         return this;
     }
 
 private:
-    int mDirection;
+    //int mDirection;
+    static int speed;
+    static int currentDirection;
+    static boolean running;
     int mTimeDelay;
 
     void stop() {
-        running = false;
+        MotorMovementCommand::running = false;
         motor1.run(RELEASE);
-        motor2.run(RELEASE);
+        motor2.run(RELEASE); 
         motor3.run(RELEASE);
         motor4.run(RELEASE);  
         delay(1000);
@@ -76,7 +83,7 @@ private:
 
     void goForward(int time) {
 
-        running = true;
+        MotorMovementCommand::running = true;
         forward();
         if (time)
         {
@@ -87,7 +94,7 @@ private:
 
     void goBack(long time) {
 
-        running = true;
+        MotorMovementCommand::running = true;
         back();
         if (time)
         {
@@ -98,14 +105,14 @@ private:
 
     void turnRight(long time) {
 
-        running = true;
+        MotorMovementCommand::running = true;
         right();
         delay(time);
         stop();
     }
 
     void turnLeft(long time) {
-        running = true;
+        MotorMovementCommand::running = true;
         left();
         delay(time);
         stop();
@@ -120,7 +127,7 @@ private:
         motor1.setSpeed(speed);
         motor2.setSpeed(speed);
         motor3.setSpeed(speed);
-        motor4.setSpeed(speed); 
+        motor4.setSpeed(speed);
     }
 
     void back() {
@@ -130,9 +137,9 @@ private:
         motor4.run(BACKWARD); 
 
         motor1.setSpeed(speed);
-        motor2.setSpeed(speed); 
-        motor3.setSpeed(speed); 
-        motor4.setSpeed(speed); 
+        motor2.setSpeed(speed);
+        motor3.setSpeed(speed);
+        motor4.setSpeed(speed);
     }
 
     void left()

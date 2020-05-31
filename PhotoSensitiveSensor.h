@@ -24,6 +24,12 @@ class PhotoSensitiveSensor
   {
       return lightLevel;
   }
+
+  float normalizeData()
+  {
+      float normal = (float)lightLevel / 512;
+      return lightLevel;
+  }
 private:
     int lightLevel;
     int lightSensorPin;

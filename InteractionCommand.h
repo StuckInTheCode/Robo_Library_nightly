@@ -5,11 +5,10 @@
 
 class InteractionCommand
 {
-  public:
-  
-  InteractionCommand() {};
-  ~InteractionCommand() {};
-  virtual void execute() = 0;
+public:
+    InteractionCommand();
+    ~InteractionCommand();
+    virtual void execute() = 0;
 };
 
 #endif

@@ -3,14 +3,14 @@
 
 class ArduinoInteractionManager
 {
-  public:
-  ArduinoInteractionManager();
-  ~ArduinoInteractionManager();
+public:
+    ArduinoInteractionManager();
+    ~ArduinoInteractionManager();
 
-  void begin();
-  void handle();
+    void begin();
+    void handle();
 
-  private:
-  MovementController * movement;
-  SerialIntercommunicator * serialcomm;
+private:
+    MovementController * movement;
+    SerialIntercommunicator * serialcomm;
 };

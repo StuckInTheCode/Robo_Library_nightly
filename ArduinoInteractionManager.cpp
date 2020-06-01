@@ -15,6 +15,7 @@ void ArduinoInteractionManager::begin()
     serialcomm = new SerialIntercommunicator();
     movement = new MovementController();
 }
+
 void ArduinoInteractionManager::handle()
 {
     serialcomm->run();

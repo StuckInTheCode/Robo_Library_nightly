@@ -5,6 +5,7 @@ MovementController::MovementController()
     USSensor.init(trigPin, echoPin);
     PSSensor.init(lightSensorPin);
     IRSensor.init(ikCenter, ikLeft, ikRight, ikBack);
+    Serial.println("Movement controller loaded");
     setInitialState();
 }
 
@@ -26,10 +27,10 @@ void MovementController::run()
         int lightLevel = PSSensor.read();
 
         //low lightning
-       /* if (lightLevel < 512)
+        if (lightLevel < 512)
             MotorMovementCommand::setSpeed(100 * PSSensor.normalizeData());
         else
-            MotorMovementCommand::setSpeed(100);*/
+            MotorMovementCommand::setDefaultSpeed();
 
         boolean barrierInForward = checkUltraSoundSensor();
         int forbiddenDirection = checkInfraSensors(barrierInForward);
@@ -101,7 +102,8 @@ boolean MovementController::checkUltraSoundSensor()
 
 int MovementController::checkInfraSensors(boolean allowForwardMovement)
 {
-    int * irSensorsState = { IRSensor.read() };
+    IRSensor.read();
+    int * irSensorsState = IRSensor.getResultAsArray();
     int returnDirection = 0;
     int multiplier = 1;
 

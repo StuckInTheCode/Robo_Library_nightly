@@ -1,8 +1,9 @@
 #ifndef PhotoSensitiveSensor_H
 #define PhotoSensitiveSensor_H
 #include "Arduino.h"
+#include "SaveStateSensor.h"
 
-class PhotoSensitiveSensor
+class PhotoSensitiveSensor : public SaveStateSensor
 {
 public:
     PhotoSensitiveSensor();
@@ -10,11 +11,9 @@ public:
 
     int read();
     void init(int sensorPin);
-    int getCurrentState();
     float normalizeData();
 
 private:
-    int lightLevel;
-    int lightSensorPin;
+    int mSensorPin;
 };
 #endif

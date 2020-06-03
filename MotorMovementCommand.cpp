@@ -1,5 +1,4 @@
 #include "MotorMovementCommand.h"
-#define DEFAULT_SPEED 100
 
 boolean MotorMovementCommand::running = false;
 int MotorMovementCommand::currentDirection = -1;
@@ -9,33 +8,18 @@ MotorMovementCommand::MotorMovementCommand() : mTimeDelay(0)
 {
     setSpeed(100);
     currentDirection = -1;
+    Serial.println("MotorMovementCommand loaded");
 }
-MotorMovementCommand::MotorMovementCommand(int direction, int timeDelay = 0) :  mTimeDelay(timeDelay) 
+
+MotorMovementCommand::MotorMovementCommand(int direction, long timeDelay) :  mTimeDelay(timeDelay) 
 {
     setSpeed(100);
     currentDirection = direction;
+    Serial.println("MotorMovementCommand loaded");
 }
 
-MotorMovementCommand::~MotorMovementCommand() {}
-
-static boolean MotorMovementCommand::isRunning()
+MotorMovementCommand::~MotorMovementCommand() 
 {
-    return MotorMovementCommand::running;
-}
-
-static int MotorMovementCommand::getCurrentDirection()
-{
-    return currentDirection;
-}
-
-static void MotorMovementCommand::setSpeed(int speed)
-{
-    speed = speed;
-}
-
-static void MotorMovementCommand::setDefaultSpeed()
-{
-    speed = DEFAULT_SPEED;
 }
 
 void MotorMovementCommand::execute()
@@ -59,7 +43,7 @@ void MotorMovementCommand::execute()
     }
 }
 
-MotorMovementCommand * MotorMovementCommand::init(int direction, int timeDelay = 0)
+MotorMovementCommand * MotorMovementCommand::init(int direction, long timeDelay)
 {
     currentDirection = direction;
     mTimeDelay = timeDelay;
@@ -78,7 +62,6 @@ void MotorMovementCommand::stop()
 
 void MotorMovementCommand::goForward(int time) 
 {
-
     MotorMovementCommand::running = true;
     forward();
     if (time)
@@ -90,7 +73,6 @@ void MotorMovementCommand::goForward(int time)
 
 void MotorMovementCommand::goBack(long time) 
 {
-
     MotorMovementCommand::running = true;
     back();
     if (time)

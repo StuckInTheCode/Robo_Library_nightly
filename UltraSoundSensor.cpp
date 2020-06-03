@@ -1,40 +1,43 @@
 #include "UltraSoundSensor.h"
 
-UltraSoundSensor::UltraSoundSensor() : duration(0), distance(3000)
+UltraSoundSensor::UltraSoundSensor() : mDuration(0)
 {
+    state = 3000;
+}
 
+UltraSoundSensor::UltraSoundSensor(int trigPin, int echoPin) : mDuration(0)
+{
+    mTrigPin = trigPin;
+    mEchoPin = echoPin;
+
+    pinMode(mTrigPin, OUTPUT);
+    pinMode(mEchoPin, INPUT);
 }
 
 UltraSoundSensor::~UltraSoundSensor() 
 {
 }
 
-void UltraSoundSensor::init(int trig, int echo)
+void UltraSoundSensor::init(int trigPin, int echoPin)
 {
-    trigPin = trig;
-    echoPin = echo;
+    mTrigPin = trigPin;
+    mEchoPin = echoPin;
 
-    pinMode(trigPin, OUTPUT);
-    pinMode(echoPin, INPUT);
+    pinMode(mTrigPin, OUTPUT);
+    pinMode(mEchoPin, INPUT);
 }
 
 int UltraSoundSensor::read() 
 {
-
-    digitalWrite(trigPin, LOW);
+    digitalWrite(mTrigPin, LOW);
     delayMicroseconds(2);
     // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-    digitalWrite(trigPin, HIGH);
+    digitalWrite(mTrigPin, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
+    digitalWrite(mTrigPin, LOW);
     // Reads the echoPin, returns the sound wave travel time in microseconds
-    duration = pulseIn(echoPin, HIGH);
+    mDuration = pulseIn(mEchoPin, HIGH);
     // Calculating the distance
-    distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-    return distance;
-}
-
-int UltraSoundSensor::getCurrentState()
-{
-    return distance;
+    state = mDuration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+    return state;
 }

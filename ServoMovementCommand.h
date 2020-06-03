@@ -9,13 +9,12 @@ static Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 static boolean started = false;
 #define SERVOMIN  150 
 #define SERVOMAX  550 
-#define SERVOPORT0 0 
-#define SERVOPORT1 1
+#define SERVOPORT0 9 
+#define SERVOPORT1 8
 
 class ServoMovementCommand : public InteractionCommand
 {
 public:
-
     ServoMovementCommand();
     ~ServoMovementCommand();
 
@@ -23,7 +22,6 @@ public:
     ServoMovementCommand * init(int servoNum, int deg);
 
 private:
-
     int mDeg;
     int mServoNum;
 

@@ -1,22 +1,22 @@
 #ifndef UltraSoundSensor_H
 #define UltraSoundSensor_H
 #include "Arduino.h"
+#include "SaveStateSensor.h"
 
-class UltraSoundSensor
+class UltraSoundSensor : public SaveStateSensor
 {
 public:
     UltraSoundSensor();
+    UltraSoundSensor(int trigPin, int echoPin);
     ~UltraSoundSensor();
 
-    void init(int trig, int echo);
+    void init(int trigPin, int echoPin);
     int read();
-    int getCurrentState();
 
 private:
-    int trigPin;
-    int echoPin;
-    long duration;
-    int distance;
+    int mTrigPin;
+    int mEchoPin;
+    long mDuration;
 };
 
 #endif

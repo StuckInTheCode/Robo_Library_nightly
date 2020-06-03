@@ -19,8 +19,8 @@ class SerialIntercommunicator
      void write(const byte data);
 
 private:
-    String command;
-    String dist;
+    String mCommand;
+    String mParameter;
 
     LocationAnalysisCommand locationCommand;
     ServoMovementCommand servoCommand;

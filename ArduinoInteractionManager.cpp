@@ -21,3 +21,23 @@ void ArduinoInteractionManager::handle()
     serialcomm->run();
     movement->run();
 }
+
+MovementController ArduinoInteractionManager::getMovementController()
+{
+    return *movement;
+}
+
+void ArduinoInteractionManager::setMovementController(MovementController * movementController)
+{
+    movement = movementController;
+}
+
+SerialIntercommunicator ArduinoInteractionManager::getSerialIntercommunicator()
+{
+    return *serialcomm;
+}
+
+void ArduinoInteractionManager::setSerialIntercommunicator(SerialIntercommunicator * serialIntercomm)
+{
+    serialcomm = serialIntercomm;
+}

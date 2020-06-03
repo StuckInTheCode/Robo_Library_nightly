@@ -2,7 +2,7 @@
 
 LocationAnalysisCommand::LocationAnalysisCommand()
 {
-    locationState = "";
+    mLocationState = "";
 }
 
 LocationAnalysisCommand::~LocationAnalysisCommand() 
@@ -11,28 +11,29 @@ LocationAnalysisCommand::~LocationAnalysisCommand()
 
 void LocationAnalysisCommand::execute()
 {
-    int * irSensorsState = { IRSensor.read() };
+    IRSensor.read();
+    int * irSensorsState = IRSensor.getResultAsArray();
     int distance = USSensor.read();
     int lightLevel = PSSensor.read();
-    locationState = "";
-    locationState += "i:";
-    locationState += irSensorsState[0];
-    locationState += ",";
-    locationState += irSensorsState[1];
-    locationState += ",";
-    locationState += irSensorsState[2];
-    locationState += ",";
-    locationState += irSensorsState[3];
-    locationState += "u:";
-    locationState += distance;
-    locationState += "l:";
-    locationState += lightLevel;
-    locationState += "\0";
+    mLocationState = "";
+    mLocationState += "i:";
+    mLocationState += irSensorsState[0];
+    mLocationState += ",";
+    mLocationState += irSensorsState[1];
+    mLocationState += ",";
+    mLocationState += irSensorsState[2];
+    mLocationState += ",";
+    mLocationState += irSensorsState[3];
+    mLocationState += "u:";
+    mLocationState += distance;
+    mLocationState += "l:";
+    mLocationState += lightLevel;
+    mLocationState += "\0";
 };
 
 const char * LocationAnalysisCommand::getResultString()
 {
-    return locationState.c_str();
+    return mLocationState.c_str();
 }
 
 LocationAnalysisCommand * LocationAnalysisCommand::init()

@@ -1,7 +1,7 @@
 #ifndef BatteryController_H
 #define BatteryController_H
 #include "Arduino.h"
-#include "BatteryChargeSensor.h"
+#include "BatteryChargeMeasurer.h"
 
 #define VOLT_PIN 20
 

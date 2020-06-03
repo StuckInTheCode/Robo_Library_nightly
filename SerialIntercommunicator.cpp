@@ -16,24 +16,23 @@ SerialIntercommunicator::~SerialIntercommunicator() {}
 
 void SerialIntercommunicator::run()
 {
-
     if (read())
     {
         Serial.println("intercomm");
 
-        switch (command[0]) {
-        case 'v': servoCommand.init(0, dist.toInt())->execute(); break;
-        case 'h': servoCommand.init(1, dist.toInt())->execute(); break;
+        switch (mCommand[0]) {
+        case 'v': servoCommand.init(0, mParameter.toInt())->execute(); break;
+        case 'h': servoCommand.init(1, mParameter.toInt())->execute(); break;
         case 's': motorCommand.init(-1)->execute(); break;
         case 'f': motorCommand.init(1)->execute(); break;
         case 'b': motorCommand.init(3)->execute(); break;
-        case 'l': motorCommand.init(0, dist.toInt())->execute(); break;
-        case 'r': motorCommand.init(2, dist.toInt())->execute(); break;
+        case 'l': motorCommand.init(0, mParameter.toInt())->execute(); break;
+        case 'r': motorCommand.init(2, mParameter.toInt())->execute(); break;
         case 'o':
-            locationCommand.execute();
-            write(locationCommand.getResultString());
-            break;
-        case 't': break;  write(batteryController.run()); break;
+                  locationCommand.execute();
+                  write(locationCommand.getResultString());
+                  break;
+        case 't': write(batteryController.run()); break;
         default:
             break;
         }
@@ -43,8 +42,8 @@ void SerialIntercommunicator::run()
 boolean SerialIntercommunicator::read()
 {
     if (Serial.available() > 0) {
-        command = Serial.readString();
-        dist = command.substring(1);
+        mCommand = Serial.readString();
+        mParameter = mCommand.substring(1);
         return true;
     }
     return false;

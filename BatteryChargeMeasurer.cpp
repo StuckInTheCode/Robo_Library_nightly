@@ -1,10 +1,10 @@
-#include "BatteryChargeSensor.h"
+#include "BatteryChargeMeasurer.h"
 
-BatteryChargeMeasurer::BatteryChargeMeasurer() : voltage(0)
+BatteryChargeMeasurer::BatteryChargeMeasurer() : mVoltage(0)
 {
 }
 
-BatteryChargeMeasurer::BatteryChargeMeasurer(int voltPin) : mVoltPint(voltPin), voltage(0)
+BatteryChargeMeasurer::BatteryChargeMeasurer(int voltPin) : mVoltPint(voltPin), mVoltage(0)
 {
 }
 
@@ -17,13 +17,14 @@ void BatteryChargeMeasurer::init(int voltPin)
     mVoltPint = voltPin;
 }
 
-float BatteryChargeMeasurer::read() {
-    voltage = ((float)analogRead(mVoltPint)) / 1024 * ((R1 + R2) / R2);
-    return voltage;
+float BatteryChargeMeasurer::read() 
+{
+    mVoltage = ((float)analogRead(mVoltPint)) / 1024 * ((R1 + R2) / R2);
+    return mVoltage;
 }
 
 float BatteryChargeMeasurer::getCurrentState()
 {
-    return voltage;
+    return mVoltage;
 }
 

@@ -1,6 +1,6 @@
 #ifndef MotorMovementCommand_h
 #define MotorMovementCommand_h
-
+#define DEFAULT_SPEED 100
 #include "Arduino.h"
 #include "InteractionCommand.h"
 #include <AFMotor.h>
@@ -14,22 +14,36 @@ class MotorMovementCommand : public InteractionCommand
 {
 public:
     MotorMovementCommand();
-    MotorMovementCommand(int direction, int timeDelay);
+    MotorMovementCommand(int direction, long timeDelay);
     ~MotorMovementCommand();
 
-    static boolean isRunning();
-    static int getCurrentDirection();
-    static void setSpeed(int speed);
-    static void setDefaultSpeed();
-    void execute();
+    static boolean isRunning()
+    {
+        return MotorMovementCommand::running;
+    }
 
-    MotorMovementCommand * init(int direction, int timeDelay = 0);
+    static int getCurrentDirection()
+    {
+        return currentDirection;
+    }
+
+    static void setSpeed(int speed)
+    {
+        speed = speed;
+    }
+    static void setDefaultSpeed()
+    {
+        speed = DEFAULT_SPEED;
+    }
+
+    void execute();
+    MotorMovementCommand * init(int direction, long timeDelay = 0);
 
 private:
     static int speed;
     static int currentDirection;
     static boolean running;
-    int mTimeDelay;
+    long mTimeDelay;
 
     void stop();
 

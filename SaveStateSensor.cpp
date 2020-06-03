@@ -2,6 +2,7 @@
 
 SaveStateSensor::SaveStateSensor()
 {
+    state = 0;
 }
 
 SaveStateSensor::~SaveStateSensor()

@@ -18,7 +18,7 @@ public:
 
 private:
     int mVoltPint;
-    float voltage;
+    float mVoltage;
 };
 
 #endif

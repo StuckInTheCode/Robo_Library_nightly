@@ -1,15 +1,24 @@
 #include "ServoMovementCommand.h"
 
-ServoMovementCommand::ServoMovementCommand() : mServoNum(0), mDeg(90) {}
-ServoMovementCommand::~ServoMovementCommand() {}
+ServoMovementCommand::ServoMovementCommand() : mServoNum(0), mDeg(90) 
+{
+    Serial.println("ServoMovementCommand loaded");
+}
+
+ServoMovementCommand::~ServoMovementCommand() 
+{
+}
 
 void ServoMovementCommand::execute()
 {
     if (!started)
     {
         pwm.begin();
+        Serial.println("begin finished");
         pwm.setPWMFreq(60);
+        Serial.println("set PWM finished");
         started = true;
+        Serial.println("PWM loaded");
     }
 
     switch (mServoNum)

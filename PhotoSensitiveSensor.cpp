@@ -4,29 +4,24 @@ PhotoSensitiveSensor::~PhotoSensitiveSensor()
 {
 }
 
-PhotoSensitiveSensor::PhotoSensitiveSensor() : lightLevel(0) 
+PhotoSensitiveSensor::PhotoSensitiveSensor()
 {
 }
 
 void PhotoSensitiveSensor::init(int sensorPin)
 {
-    lightSensorPin = sensorPin;
+    mSensorPin = sensorPin;
     pinMode(sensorPin, INPUT);
 }
 
 int PhotoSensitiveSensor::read()
 {
-    lightLevel = analogRead(lightSensorPin);
-    return lightLevel;
-}
-
-int PhotoSensitiveSensor::getCurrentState()
-{
-    return lightLevel;
+    state = analogRead(mSensorPin);
+    return state;
 }
 
 float PhotoSensitiveSensor::normalizeData()
 {
-    float normal = (float)lightLevel / 512;
-    return lightLevel;
+    float normal = (float)state / 512;
+    return normal;
 }

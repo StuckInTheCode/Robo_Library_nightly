@@ -9,6 +9,10 @@ public:
 
     void begin();
     void handle();
+    MovementController getMovementController();
+    void setMovementController(MovementController * movementController);
+    SerialIntercommunicator getSerialIntercommunicator();
+    void setSerialIntercommunicator(SerialIntercommunicator * serialIntercomm);
 
 private:
     MovementController * movement;

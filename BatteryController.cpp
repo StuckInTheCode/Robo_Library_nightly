@@ -11,12 +11,13 @@ BatteryController::~BatteryController()
 byte BatteryController::run() 
 {
     float volts = 0;
-    float k = 5;              // correlation coefficient to the real current value of the voltage of the batteries
-    for (int i = 0; i < 5; i++) {
-        volts += sensor.read(); //get the voltage of 5 in 10ns
+    float k = 5;                  // correlation coefficient to the real current value of the voltage of the batteries
+    for (int i = 0; i < 5; i++) 
+    {
+        volts += sensor.read();   //get the voltage of 5 in 10ns
     }
 
-    int measure = 100 * (volts / (3 * 5));   //get the voltage*100 for 1 battery
+    int measure = 100 * (volts / (3 * 5));  //get the voltage*100 for 1 battery
 
     if (measure > 380)                      //full charge
         return map(measure, 420, 380, 100, 80);

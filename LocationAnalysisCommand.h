@@ -5,12 +5,11 @@
 #include "UltraSoundSensor.h"
 #include "InfraSensor.h"
 #include "PhotoSensitiveSensor.h"
-//class MovementController;
 
 #define ikCenter 14
 #define ikLeft 15
 #define ikRight 16
-#define ikBack 17
+#define ikBack 17 
 
 #define trigPin 10
 #define echoPin 9
@@ -28,7 +27,7 @@ public:
     LocationAnalysisCommand * init();
 
 private:
-    String locationState;
+    String mLocationState;
     UltraSoundSensor USSensor;
     PhotoSensitiveSensor PSSensor;
     InfraSensor IRSensor;

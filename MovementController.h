@@ -24,12 +24,12 @@ public:
     ~MovementController();
 
     void setInitialState();
-
     void run();
+
+private:
     boolean checkUltraSoundSensor();
     int checkInfraSensors(boolean allowForwardMovement);
 
-private:
     ServoMovementCommand servoCommand;
     MotorMovementCommand motorCommand;
     UltraSoundSensor USSensor;

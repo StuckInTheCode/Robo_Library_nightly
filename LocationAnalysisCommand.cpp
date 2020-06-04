@@ -14,7 +14,7 @@ void LocationAnalysisCommand::execute()
     IRSensor.read();
     int * irSensorsState = IRSensor.getResultAsArray();
     int distance = USSensor.read();
-    int lightLevel = PSSensor.read();
+    //int lightLevel = PSSensor.read();
     mLocationState = "";
     mLocationState += "i:";
     mLocationState += irSensorsState[0];
@@ -27,7 +27,7 @@ void LocationAnalysisCommand::execute()
     mLocationState += "u:";
     mLocationState += distance;
     mLocationState += "l:";
-    mLocationState += lightLevel;
+    mLocationState += 0; // lightLevel;
     mLocationState += "\0";
 };
 
@@ -39,6 +39,6 @@ const char * LocationAnalysisCommand::getResultString()
 LocationAnalysisCommand * LocationAnalysisCommand::init()
 {
     USSensor.init(trigPin, echoPin);
-    PSSensor.init(lightSensorPin);
+    //PSSensor.init(lightSensorPin);
     IRSensor.init(ikCenter, ikLeft, ikRight, ikBack);
 }

@@ -1,4 +1,9 @@
 #include "SerialIntercommunicator.h"
+#define MOVE_STOP -1
+#define MOVE_LEFT 0
+#define MOVE_FORWARD 1
+#define MOVE_RIGHT 2
+#define MOVE_BACK 3
 
 SerialIntercommunicator::SerialIntercommunicator()
 {
@@ -23,11 +28,11 @@ void SerialIntercommunicator::run()
         switch (mCommand[0]) {
         case 'v': servoCommand.init(0, mParameter.toInt())->execute(); break;
         case 'h': servoCommand.init(1, mParameter.toInt())->execute(); break;
-        case 's': motorCommand.init(-1)->execute(); break;
-        case 'f': motorCommand.init(1)->execute(); break;
-        case 'b': motorCommand.init(3)->execute(); break;
-        case 'l': motorCommand.init(0, mParameter.toInt())->execute(); break;
-        case 'r': motorCommand.init(2, mParameter.toInt())->execute(); break;
+        case 's': motorCommand.init(MOVE_STOP)->execute(); break;
+        case 'f': motorCommand.init(MOVE_FORWARD)->execute(); break;
+        case 'b': motorCommand.init(MOVE_BACK)->execute(); break;
+        case 'l': motorCommand.init(MOVE_LEFT, mParameter.toInt())->execute(); break;
+        case 'r': motorCommand.init(MOVE_RIGHT, mParameter.toInt())->execute(); break;
         case 'o':
                   locationCommand.execute();
                   write(locationCommand.getResultString());

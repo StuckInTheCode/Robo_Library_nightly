@@ -1,4 +1,18 @@
 #include "MovementController.h"
+#define FORBID_FORWARD 1
+#define FORBID_LEFT 2
+#define FORBID_FORWARD_LEFT 3
+#define FORBID_RIGHT 4
+#define FORBID_FORWARD_RIGHT 5
+#define FORBID_LEFT_RIGHT 6
+#define FORBID_FORWARD_LEFT_RIGHT 7
+#define FORBID_ALL 15
+
+#define MOVE_STOP -1
+#define MOVE_LEFT 0
+#define MOVE_FORWARD 1
+#define MOVE_RIGHT 2
+#define MOVE_BACK 3
 
 MovementController::MovementController()
 {
@@ -49,42 +63,42 @@ void MovementController::run()
         {
         case 0:
             break;
-        case 1: //forward
-        case 2:
-        case 3:
+        case FORBID_FORWARD: //forward
+        case FORBID_LEFT:
+        case FORBID_FORWARD_LEFT:
             if (MotorMovementCommand::getCurrentDirection() < 3)
             {
-                motorCommand.init(3, 500)->execute();
-                motorCommand.init(2, 200)->execute();
-                motorCommand.init(1)->execute();
+                motorCommand.init(MOVE_BACK, 500)->execute();
+                motorCommand.init(MOVE_RIGHT, 200)->execute();
+                motorCommand.init(MOVE_FORWARD)->execute();
             }
             break;
-        case 4://center && right
-        case 5:
+        case FORBID_RIGHT://center && right
+        case FORBID_FORWARD_RIGHT:
             if (MotorMovementCommand::getCurrentDirection() < 3)
             {
-                motorCommand.init(3, 500)->execute();
-                motorCommand.init(0, 200)->execute();
-                motorCommand.init(1)->execute();
+                motorCommand.init(MOVE_BACK, 500)->execute();
+                motorCommand.init(MOVE_LEFT, 200)->execute();
+                motorCommand.init(MOVE_FORWARD)->execute();
             }
             break;
-        case 6://left & right
-        case 7://& center
+        case FORBID_LEFT_RIGHT://left & right
+        case FORBID_FORWARD_LEFT_RIGHT://& center
             if (MotorMovementCommand::getCurrentDirection() < 3)
             {
-                motorCommand.init(3, 500)->execute();
-                motorCommand.init(-1)->execute();
+                motorCommand.init(MOVE_BACK, 500)->execute();
+                motorCommand.init(MOVE_STOP)->execute();
             }
             break;
-        case 15:
-            motorCommand.init(-1)->execute();
+        case FORBID_ALL:
+            motorCommand.init(MOVE_STOP)->execute();
             break;
         default:
             if (MotorMovementCommand::getCurrentDirection() == 3)
             {
-                motorCommand.init(1, 500)->execute();
-                motorCommand.init(0, 500)->execute();
-                motorCommand.init(3)->execute(); //time?
+                motorCommand.init(MOVE_FORWARD, 500)->execute();
+                motorCommand.init(MOVE_LEFT, 500)->execute();
+                motorCommand.init(MOVE_BACK)->execute(); 
             }
             break;
         }

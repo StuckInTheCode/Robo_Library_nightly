@@ -43,6 +43,11 @@ void SerialIntercommunicator::run()
             break;
         }
     }
+    else
+    {
+        //locationCommand.execute();
+        //write(locationCommand.getResultString());
+    }
 }
 
 boolean SerialIntercommunicator::read()

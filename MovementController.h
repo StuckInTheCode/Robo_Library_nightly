@@ -7,13 +7,21 @@
 #include "PhotoSensitiveSensor.h"
 #include "ServoMovementCommand.h"
 
-#define ikCenter 18
-#define ikLeft 19
-#define ikRight 17
-#define ikBack 16
+//#define ikCenter 18
+//#define ikLeft 19
+//#define ikRight 17
+//#define ikBack 16
+//
+//#define trigPin 10 
+//#define echoPin 9
 
-#define trigPin 2 
-#define echoPin 15
+#define ikCenter 14
+#define ikLeft 15
+#define ikRight 16
+#define ikBack 17 
+
+#define trigPin 10
+#define echoPin 9
 
 #define lightSensorPin 18
 

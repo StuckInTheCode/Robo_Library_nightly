@@ -47,7 +47,9 @@ void MovementController::run()
         //    MotorMovementCommand::setDefaultSpeed();
 
         //boolean barrierInForward = checkUltraSoundSensor();
-        int forbiddenDirection = checkInfraSensors(false);
+
+        int forbiddenDirection = checkInfraSensors(true);
+        //int forbiddenDirection = 3;
 
         //none 0 //break
         //center 1 // go back, turn right and forward
@@ -58,6 +60,8 @@ void MovementController::run()
         //left & right 6 // go back and stop 
         //center & left & right 7 // go back and stop
         //back 8 // go forward
+
+
         switch (forbiddenDirection)
         {
         case 0:
@@ -65,44 +69,54 @@ void MovementController::run()
         case FORBID_FORWARD: //forward
         case FORBID_LEFT:
         case FORBID_FORWARD_LEFT:
-            if (MotorMovementCommand::getCurrentDirection() < 3)
+            if (MotorMovementCommand::getCurrentDirection() < MOVE_BACK)
             {
+                Serial.println("FORBID_FORWARD_LEFT");
                 motorCommand.init(MOVE_BACK, 500)->execute();
                 motorCommand.init(MOVE_RIGHT, 300)->execute();
-                motorCommand.init(MOVE_FORWARD)->execute();
+                motorCommand.init(MOVE_FORWARD, 500)->execute();
             }
             break;
         case FORBID_RIGHT://center && right
         case FORBID_FORWARD_RIGHT:
-            if (MotorMovementCommand::getCurrentDirection() < 3)
+            if (MotorMovementCommand::getCurrentDirection() < MOVE_BACK)
             {
+                Serial.println("FORBID_FORWARD_RIGHT");
                 motorCommand.init(MOVE_BACK, 500)->execute();
                 motorCommand.init(MOVE_LEFT, 300)->execute();
-                motorCommand.init(MOVE_FORWARD)->execute();
+                motorCommand.init(MOVE_FORWARD, 500)->execute();
             }
             break;
         case FORBID_LEFT_RIGHT://left & right
         case FORBID_FORWARD_LEFT_RIGHT://& center
-            if (MotorMovementCommand::getCurrentDirection() < 3)
+            if (MotorMovementCommand::getCurrentDirection() < MOVE_BACK)
             {
+                Serial.println("FORBID_FORWARD_LEFT_RIGHT");
                 motorCommand.init(MOVE_BACK, 500)->execute();
                 motorCommand.init(MOVE_LEFT, 50)->execute();
-                motorCommand.init(MOVE_FORWARD)->execute();
+                motorCommand.init(MOVE_FORWARD, 500)->execute();
                 //motorCommand.init(MOVE_STOP)->execute();
             }
             break;
         case FORBID_ALL:
+            Serial.println("FORBID_ALL");
             motorCommand.init(MOVE_STOP)->execute();
             break;
         default:
-            if (MotorMovementCommand::getCurrentDirection() == 3)
+            if (MotorMovementCommand::getCurrentDirection() == MOVE_BACK)
             {
+                Serial.println("FORBID DEFAULT");
                 motorCommand.init(MOVE_FORWARD, 500)->execute();
                 motorCommand.init(MOVE_LEFT, 500)->execute();
-                motorCommand.init(MOVE_BACK)->execute(); 
+                motorCommand.init(MOVE_BACK, 500)->execute(); 
             }
             break;
         }
+
+    }
+    else
+    {
+        //motorCommand.init(MOVE_STOP)->execute();
     }
 }
 
@@ -118,11 +132,11 @@ boolean MovementController::checkUltraSoundSensor()
 int MovementController::checkInfraSensors(boolean allowForwardMovement)
 {
     int returnDirection =IRSensor.read();
-    int * irSensorsState = IRSensor.getResultAsArray();
-    int multiplier = 1;
+    //int * irSensorsState = IRSensor.getResultAsArray();
+    //int multiplier = 1;
 
-    if (!allowForwardMovement)
-        irSensorsState[0] = 0;
+    //if (!allowForwardMovement)
+    //    irSensorsState[0] = 0;
 
     //for (int index = 0; index < 4; index++)
     //{
